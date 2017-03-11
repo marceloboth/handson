@@ -29,11 +29,18 @@ installing route-test
 
 #### Router
 
+Entede o que é passado na url, e instância o Route.
+
 #### Route
+
+É capaz de buscar dados, gravar, remover e filtrar.
 
 #### Model
 
+Representa o dominio
+
 #### Template
+
 
 #### Testes
 
@@ -41,7 +48,12 @@ installing route-test
 
 #### Criando e ajustando o adapter
 
+`ember g adapter application`
+
 ### Listando dados
+
+Necessário criar um arquivo de route para buscar os dados no servidor e um template
+para exibir.
 
 ### Criando
 
@@ -49,4 +61,4 @@ installing route-test
 
 ### Removendo
 
-### Filtrando 
+### Filtrando
