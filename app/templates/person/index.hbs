@@ -1,1 +1,5 @@
-{{outlet}}
+<ul>
+  {{#each model as |person|}}
+    <li>{{person.firstName}} {{person.lastName}}</li>
+  {{/each}}
+</ul>
