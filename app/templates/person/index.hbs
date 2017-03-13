@@ -1,5 +1,6 @@
+{{link-to 'Novo Cadastro' 'person.new'}}
 <ul>
   {{#each model as |person|}}
-    <li>{{person.firstName}} {{person.lastName}}</li>
+    <li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'person.show' person}}</li>
   {{/each}}
 </ul>
