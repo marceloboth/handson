@@ -159,6 +159,135 @@ export default function() {
 
 ### Criando
 
+Para criar um novo cadastro, precisamos criar um rota e os arquivos de route e template:
+
+`ember g route person/new`
+
+```
+installing route
+  create app/routes/person/new.js
+  create app/templates/person/new.hbs
+updating router
+  add route person/new
+installing route-test
+  create tests/unit/routes/person/new-test.js
+```
+
+Para o usuário acessar a criação de cadastro, precisamos adicionar um link para a rota, no arquivo `app/templates/person/index.hbs` adicione:
+
+```
+{{link-to 'Novo cadastro' 'person.new'}}
+```
+
+Agora no arquivo de route `app/routes/person/new.js`, instancie um novo registro de pessoa:
+
+```
+import Ember from 'ember';
+
+export default Ember.Route.extend({
+  model() {
+    return this.store.createRecord('person');
+  }
+});
+```
+
+E crie o formulário no template gerado `app/templates/person/new.hbs`:
+
+```
+<form {{action "save" on="submit"}}>
+  <p>
+    <label>Nome:
+      {{input value=model.firstName}}
+    </label>
+  </p>
+  <p>
+    <label>Ultimo nome:
+      {{input value=model.lastName}}
+    </label>
+  </p>
+  <p>
+    <label>E-mail:
+      {{input value=model.email}}
+    </label>
+  </p>
+  <p>
+    <label>Data de nascimento:
+      {{input value=model.birthDay}}
+    </label>
+  </p>
+  <p>
+    <label>Salario:
+      {{input value=model.salary}}
+    </label>
+  </p>
+  <input type="submit" value="Salvar"/>
+  <button {{action "cancel"}}>Cancelar</button>
+</form>
+```
+
+Para salvar, precisamos criar as ações de salvar (save) e cancelar (cancel). Vamos criar um arquivo de controller para isso, basta gerar ele: `ember g controller person/new` e adicionar o código abaixo:
+
+```
+import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  actions: {
+    save() {
+      this.get('model').save().then((person) => {
+        this.transitionToRoute('person.show', person);
+      });
+    },
+    cancel() {
+      this.transitionToRoute('person');
+    }
+  }
+});
+```
+
+### Exibindo um cadastro
+
+`ember g route person/show --path=:person_id`
+
+```
+installing route
+  create app/routes/person/show.js
+  create app/templates/person/show.hbs
+updating router
+  add route person/show
+installing route-test
+  create tests/unit/routes/person/show-test.js
+```
+
+Para encontrar o cadastro, no arquivo de route defina a busca:
+
+```
+import Ember from 'ember';
+
+export default Ember.Route.extend({
+  model(params) {
+    return this.store.findRecord('person', params.person_id);
+  }
+});
+```
+
+No arquivo de template adiciona os dados do cadastro:
+
+```
+<ul>
+  <li>Nome: {{model.firstName}}</li>
+  <li>Ultímo nome: {{model.lastName}}</li>
+  <li>E-mail: {{model.email}}</li>
+  <li>Data de nascimento: {{model.birthDay}}</li>
+  <li>Salário: {{model.salary}}</li>
+</ul>
+
+{{link-to 'Voltar' 'person'}}
+```
+
+E atualize a listagem para navegar ao cadastro de cada pessoa:
+
+`<li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'person.show' person}}</li>`
+
 ### Editando
 
 ### Removendo
