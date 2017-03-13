@@ -102,6 +102,60 @@ Já no arquivo de template (`app/templates/person/index.hbs`) basta fazer a exib
 </ul>
 ```
 
+#### Configurando Mock da API
+
+Com o addon [Mirage](http://www.ember-cli-mirage.com/) podemos simular nossa API, sem ela ainda existir, basta instalar a biblioteca: `ember install ember-cli-mirage`, que ao final da instalação criará os seguintes arquivos:
+
+```
+installing ember-cli-mirage
+  create /mirage/config.js
+  create /mirage/scenarios/default.js
+  create /mirage/serializers/application.js
+```
+
+Para conseguir simular, precisamos criar os arquivos de model e uma factory que irá gerar dados apartir do model:
+
+`ember g mirage-model person`
+
+```
+create /mirage/models/person.js
+```
+
+`ember g mirage-factory person`
+
+```
+create /mirage/factories/person.js
+```
+
+Necessário adicionar a geração do conteúdo:
+
+```
+import { Factory, faker } from 'ember-cli-mirage';
+
+export default Factory.extend({
+  firstName() { return faker.name.firstName(); },
+  lastName() { return faker.name.lastName(); },
+  email() { return faker.internet.email(); },
+  birthDay() { return new Date(); },
+  salary() { return 1000.00; }
+});
+```
+
+Agora basta criar os dados, configurando o arquivo `/mirage/scenarios/default.js`:
+
+```
+export default function(server) {
+  server.createList('person', 10);
+}
+```
+
+E informar ao Mirage para simular todas as requisições de rotas para a API no endpoint `/people`. Basta no arquivo `/mirage/config.js` infomar:
+
+```
+export default function() {
+  this.resource('people');
+}
+```
 
 ### Criando
 
