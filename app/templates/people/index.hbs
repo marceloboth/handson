@@ -1,0 +1,6 @@
+{{link-to 'Novo Cadastro' 'people.new'}}
+<ul>
+  {{#each model as |person|}}
+    <li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'people.person.show' person}} | {{link-to 'Editar' 'people.person.edit' person}}</li>
+  {{/each}}
+</ul>

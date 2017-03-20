@@ -66,21 +66,21 @@ installing adapter-test
 Necessário criar um arquivo de route para buscar os dados no servidor e um template
 para exibir, isso é possível pelo generator `route`:
 
-`ember g route person/index`
+`ember g route people/index`
 
 Que gera os arquivos:
 
 ```
 installing route
-  create app/routes/person/index.js
-  create app/templates/person/index.hbs
+  create app/routes/people/index.js
+  create app/templates/people/index.hbs
 updating router
-  add route person/index
+  add route people/index
 installing route-test
-  create tests/unit/routes/person/index-test.js
+  create tests/unit/routes/people/index-test.js
 ```
 
-No arquivo de route (`app/routes/person/index.js`), é necessário buscar todos os cadastros:
+No arquivo de route (`app/routes/people/index.js`), é necessário buscar todos os cadastros:
 
 ```
 import Ember from 'ember';
@@ -92,7 +92,7 @@ export default Ember.Route.extend({
 });
 ```
 
-Já no arquivo de template (`app/templates/person/index.hbs`) basta fazer a exibição da listagem:
+Já no arquivo de template (`app/templates/people/index.hbs`) basta fazer a exibição da listagem:
 
 ```
 <ul>
@@ -161,25 +161,25 @@ export default function() {
 
 Para criar um novo cadastro, precisamos criar um rota e os arquivos de route e template:
 
-`ember g route person/new`
+`ember g route people/new`
 
 ```
 installing route
-  create app/routes/person/new.js
-  create app/templates/person/new.hbs
+  create app/routes/people/new.js
+  create app/templates/people/new.hbs
 updating router
-  add route person/new
+  add route people/new
 installing route-test
-  create tests/unit/routes/person/new-test.js
+  create tests/unit/routes/people/new-test.js
 ```
 
-Para o usuário acessar a criação de cadastro, precisamos adicionar um link para a rota, no arquivo `app/templates/person/index.hbs` adicione:
+Para o usuário acessar a criação de cadastro, precisamos adicionar um link para a rota, no arquivo `app/templates/people/index.hbs` adicione:
 
 ```
-{{link-to 'Novo cadastro' 'person.new'}}
+{{link-to 'Novo cadastro' 'people.new'}}
 ```
 
-Agora no arquivo de route `app/routes/person/new.js`, instancie um novo registro de pessoa:
+Agora no arquivo de route `app/routes/people/new.js`, instancie um novo registro de pessoa:
 
 ```
 import Ember from 'ember';
@@ -191,7 +191,7 @@ export default Ember.Route.extend({
 });
 ```
 
-E crie o formulário no template gerado `app/templates/person/new.hbs`:
+E crie o formulário no template gerado `app/templates/people/new.hbs`:
 
 ```
 <form {{action "save" on="submit"}}>
@@ -234,11 +234,11 @@ export default Ember.Controller.extend({
   actions: {
     save() {
       this.get('model').save().then((person) => {
-        this.transitionToRoute('person.show', person);
+        this.transitionToRoute('people.person.show', person);
       });
     },
     cancel() {
-      this.transitionToRoute('person');
+      this.transitionToRoute('people');
     }
   }
 });
@@ -246,16 +246,16 @@ export default Ember.Controller.extend({
 
 ### Exibindo um cadastro
 
-`ember g route person/show --path=:person_id`
+`ember g route people/person/show --path=:person_id`
 
 ```
 installing route
-  create app/routes/person/show.js
-  create app/templates/person/show.hbs
+  create app/routes/people/person/show.js
+  create app/templates/people/person/show.hbs
 updating router
-  add route person/show
+  add route people/person/show
 installing route-test
-  create tests/unit/routes/person/show-test.js
+  create tests/unit/routes/people/person/show-test.js
 ```
 
 Para encontrar o cadastro, no arquivo de route defina a busca:
@@ -286,9 +286,17 @@ No arquivo de template adiciona os dados do cadastro:
 
 E atualize a listagem para navegar ao cadastro de cada pessoa:
 
-`<li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'person.show' person}}</li>`
+`<li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'people.person.show' person}}</li>`
 
 ### Editando
+
+Adicione o link para Alterar o cadastro na listagem geral:
+
+`<li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'people.person.show' person}} | {{link-to 'Editar' 'people.person.edit' person}}</li>`
+
+Renomear o arquivo show para person.
+
+Formulário.
 
 ### Removendo
 
