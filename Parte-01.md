@@ -246,16 +246,16 @@ export default Ember.Controller.extend({
 
 ### Exibindo um cadastro
 
-`ember g route people/person/show --path=:person_id`
+`ember g route people/person --path=:person_id`
 
 ```
 installing route
-  create app/routes/people/person/show.js
-  create app/templates/people/person/show.hbs
+  create app/routes/people/person.js
+  create app/templates/people/person.hbs
 updating router
-  add route people/person/show
+  add route people/person
 installing route-test
-  create tests/unit/routes/people/person/show-test.js
+  create tests/unit/routes/people/person-test.js
 ```
 
 Para encontrar o cadastro, no arquivo de route defina a busca:
@@ -270,7 +270,8 @@ export default Ember.Route.extend({
 });
 ```
 
-No arquivo de template adiciona os dados do cadastro:
+Renomeie o arquivo de template para `app/templates/people/person/show.hbs` e adicione a seguinte estrutura responsável
+por exibir os dados do cadastro:
 
 ```
 <ul>
@@ -294,10 +295,29 @@ Adicione o link para Alterar o cadastro na listagem geral:
 
 `<li>{{person.firstName}} {{person.lastName}} - {{link-to 'Exibir' 'people.person.show' person}} | {{link-to 'Editar' 'people.person.edit' person}}</li>`
 
-Renomear o arquivo show para person.
+Já temos a rota que recupera o cadastro a ser alterado, basta criar o arquivo de template:
 
-Formulário.
+`ember g template people/person/edit.hbs`
 
+Nesse arquivo adicionariemos o código do formulário de edição, porém criaremos um componente para reaproveitar o formulário de cadastro:
+
+`ember g component people/person-form`
+
+```
+installing component
+  create app/components/people/person-form.js
+  create app/templates/components/people/person-form.hbs
+installing component-test
+  create tests/integration/components/people/person-form-test.js
+```
+
+Mova o código que está em `app/templates/people/new.hbs` para `app/templates/people/person-form` e no arquivo `new.hbs` faça a chamada ao componente. 
+
+```
+{{people/person-form}}
+```
+
+Faça o mesmo procedimento no arquivo `app/templates/people/person/edit.hbs`
 ### Removendo
 
 ### Filtrando
