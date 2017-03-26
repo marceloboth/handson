@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('person');
+      this.transitionToRoute('people');
     }
   }
 });

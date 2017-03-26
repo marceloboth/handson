@@ -1,0 +1,29 @@
+<form {{action "save" on="submit"}}>
+  <p>
+    <label>Nome:
+      {{input value=model.firstName}}
+    </label>
+  </p>
+  <p>
+    <label>Ultimo nome:
+      {{input value=model.lastName}}
+    </label>
+  </p>
+  <p>
+    <label>E-mail:
+      {{input value=model.email}}
+    </label>
+  </p>
+  <p>
+    <label>Data de nascimento:
+      {{input value=model.birthDay}}
+    </label>
+  </p>
+  <p>
+    <label>Salario:
+      {{input value=model.salary}}
+    </label>
+  </p>
+  <input type="submit" value="Salvar"/>
+  <button {{action "cancel"}}>Cancelar</button>
+</form>
