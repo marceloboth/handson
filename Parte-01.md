@@ -323,10 +323,27 @@ installing component-test
 Mova o código que está em `app/templates/people/new.hbs` para `app/templates/people/person-form` e no arquivo `new.hbs` faça a chamada ao componente. 
 
 ```
-{{people/person-form}}
+{{people/person-form model=model save=(action 'save') cancel=(action 'cancel')}}
 ```
 
-Faça o mesmo procedimento no arquivo `app/templates/people/person/edit.hbs`
+Faça o mesmo procedimento no arquivo `app/templates/people/person/edit.hbs`. Após isso vamos adicionar a ação ao componente,
+para que seja possível salvar e cancelar, usaremos `Closure Actions [Colocar link]`.
+
+```
+import Ember from 'ember';
+
+export default Ember.Component.extend({
+  actions: {
+    save() {
+      this.attrs.save();
+    },
+    cancel() {
+      this.attrs.cancel();
+    }
+  }
+});
+```
+
 ### Removendo
 
 ### Filtrando

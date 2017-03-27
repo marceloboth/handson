@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   actions: {
     save() {
       this.get('model').save().then((person) => {
-        this.transitionToRoute('person.show', person);
+        this.transitionToRoute('people.person.show', person);
       });
     },
     cancel() {
