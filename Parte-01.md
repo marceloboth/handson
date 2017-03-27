@@ -102,6 +102,15 @@ Já no arquivo de template (`app/templates/people/index.hbs`) basta fazer a exib
 </ul>
 ```
 
+Adicione um link para a listagem de pessoas. No arquivo de template principal (`app/templates/people/application.hbs`):
+
+```
+<nav>
+  {{link-to 'Pessoas' 'people'}}
+</nav>
+<br />
+```
+
 #### Configurando Mock da API
 
 Com o addon [Mirage](http://www.ember-cli-mirage.com/) podemos simular nossa API, sem ela ainda existir, basta instalar a biblioteca: `ember install ember-cli-mirage`, que ao final da instalação criará os seguintes arquivos:
