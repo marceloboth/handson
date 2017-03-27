@@ -1,4 +1,4 @@
-<form {{action "save" on="submit"}}>
+<form>
   <p>
     <label>Nome:
       {{input value=model.firstName}}
@@ -24,6 +24,6 @@
       {{input value=model.salary}}
     </label>
   </p>
-  <input type="submit" value="Salvar"/>
+  <button {{action "save"}}>Salvar</button>
   <button {{action "cancel"}}>Cancelar</button>
 </form>
